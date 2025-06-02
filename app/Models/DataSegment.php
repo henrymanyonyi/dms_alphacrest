@@ -15,4 +15,12 @@ class DataSegment extends Model
         'created_by',
         'deleted_by',
     ];
+    
+    /**
+     * Get the sector that owns the data segment.
+     */
+    public function sector()
+    {
+        return $this->belongsTo(Sector::class);
+    }
 }
