@@ -1,13 +1,13 @@
 <?php
 
-namespace App\Livewire;
+namespace App\Livewire\Data;
 
 use App\Models\Data;
 use App\Models\DataSegment;
 use Livewire\Component;
 use Livewire\WithFileUploads;
 
-class DataEdit extends Component
+class Edit extends Component
 {
     use WithFileUploads;
     
@@ -148,6 +148,6 @@ class DataEdit extends Component
     
     public function render()
     {
-        return view('livewire.data-edit');
+        return view('livewire.data.edit');
     }
 }

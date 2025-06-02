@@ -1,11 +1,13 @@
 <?php
 
-namespace App\Livewire;
+namespace App\Livewire\DataSegment;
 
+use App\Models\DataSegment;
+use App\Models\Sector;
 use Livewire\Component;
 use Livewire\WithFileUploads;
 
-class DataSegmentEdit extends Component
+class Edit extends Component
 {
     use WithFileUploads;
     
@@ -32,6 +34,9 @@ class DataSegmentEdit extends Component
 
     public function updateDataSegment()
     {
+        // Update validation rule for name to ignore the current record
+        $this->rules['name'] = 'required|max:255|unique:data_segments,name,' . $this->dataSegment->id;
+        
         $this->validate();
 
         try {
@@ -60,6 +65,6 @@ class DataSegmentEdit extends Component
 
     public function render()
     {
-        return view('livewire.data-segment-edit');
+        return view('livewire.data-segment.edit');
     }
 }

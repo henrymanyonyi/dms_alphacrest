@@ -89,7 +89,7 @@
                             </td>
                             <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
                                 <a href="{{ route('data.edit', $data) }}" class="text-indigo-600 hover:text-indigo-900 mr-3">Edit</a>
-                                <button wire:click="confirmDelete({{ $data->id }})" class="text-red-600 hover:text-red-900">Delete</button>
+                                <button wire:click="confirmDataDeletion({{ $data->id }})" class="text-red-600 hover:text-red-900">Delete</button>
                             </td>
                         </tr>
                     @empty
@@ -108,13 +108,13 @@
         </div>
 
         <!-- Delete Confirmation Modal -->
-        @if($confirmingDelete)
+        @if($confirmingDataDeletion)
             <div class="fixed inset-0 bg-gray-500 bg-opacity-75 flex items-center justify-center z-50" x-data>
                 <div class="bg-white rounded-lg p-6 max-w-md mx-auto">
                     <h3 class="text-lg font-medium text-gray-900 mb-4">Confirm Deletion</h3>
                     <p class="text-sm text-gray-500 mb-4">Are you sure you want to delete this data entry? This action cannot be undone.</p>
                     <div class="flex justify-end">
-                        <button wire:click="$set('confirmingDelete', false)" class="mr-3 px-4 py-2 bg-gray-200 text-gray-700 rounded-md hover:bg-gray-300 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500">
+                        <button wire:click="$set('confirmingDataDeletion', false)" class="mr-3 px-4 py-2 bg-gray-200 text-gray-700 rounded-md hover:bg-gray-300 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500">
                             Cancel
                         </button>
                         <button wire:click="deleteData" class="px-4 py-2 bg-red-600 text-white rounded-md hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500">
