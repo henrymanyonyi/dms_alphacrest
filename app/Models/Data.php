@@ -30,4 +30,12 @@ class Data extends Model
         'approval_status',
         'view_count',
     ];
+    
+    /**
+     * Get the data segment that owns the data.
+     */
+    public function dataSegment()
+    {
+        return $this->belongsTo(DataSegment::class);
+    }
 }
