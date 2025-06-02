@@ -16,17 +16,17 @@ Route::middleware([
     })->name('dashboard');
 
     // Sector Routes
-    Route::get('/sectors', \App\Livewire\SectorIndex::class)->name('sectors.index');
-    Route::get('/sectors/create', \App\Livewire\SectorCreate::class)->name('sectors.create');
-    Route::get('/sectors/{sector}/edit', \App\Livewire\SectorEdit::class)->name('sectors.edit');
+    Route::get('/sectors', \App\Livewire\Sector\Index::class)->name('sectors.index');
+    Route::get('/sectors/create', \App\Livewire\Sector\Create::class)->name('sectors.create');
+    Route::get('/sectors/{sector}/edit', \App\Livewire\Sector\Edit::class)->name('sectors.edit');
 
     // Data Segment Routes
-    Route::get('/data-segments', \App\Livewire\DataSegmentIndex::class)->name('data-segments.index');
-    Route::get('/data-segments/create', \App\Livewire\DataSegmentCreate::class)->name('data-segments.create');
-    Route::get('/data-segments/{dataSegment}/edit', \App\Livewire\DataSegmentEdit::class)->name('data-segments.edit');
+    Route::get('/data-segments', \App\Livewire\DataSegment\Index::class)->name('data-segments.index');
+    Route::get('/data-segments/create', \App\Livewire\DataSegment\Create::class)->name('data-segments.create');
+    Route::get('/data-segments/{dataSegment}/edit', \App\Livewire\DataSegment\Edit::class)->name('data-segments.edit');
 
     // Data Routes
-    Route::get('/data', \App\Livewire\DataIndex::class)->name('data.index');
-    Route::get('/data/create', \App\Livewire\DataCreate::class)->name('data.create');
-    Route::get('/data/{data}/edit', \App\Livewire\DataEdit::class)->name('data.edit');
+    Route::get('/data', \App\Livewire\Data\Index::class)->name('data.index');
+    Route::get('/data/create', \App\Livewire\Data\Create::class)->name('data.create');
+    Route::get('/data/{data}/edit', \App\Livewire\Data\Edit::class)->name('data.edit');
 });
