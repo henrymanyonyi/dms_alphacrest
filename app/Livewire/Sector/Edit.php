@@ -1,22 +1,18 @@
 <?php
 
-namespace App\Livewire;
+namespace App\Livewire\Sector;
 
-use Livewire\Component;
 use App\Models\Sector;
-use Livewire\WithFileUploads;
+use Livewire\Component;
 
-class SectorEdit extends Component
+class Edit extends Component
 {
-    use WithFileUploads;
-    
     public $sector;
     public $name;
     public $description;
-    public $errors = [];
 
     protected $rules = [
-        'name' => 'required|max:255|unique:sectors,name,{{ $this->sector->id }}',
+        'name' => 'required|max:255',
         'description' => 'nullable|max:1000',
     ];
 
@@ -29,6 +25,9 @@ class SectorEdit extends Component
 
     public function updateSector()
     {
+        // Update validation rule for name to ignore the current record
+        $this->rules['name'] = 'required|max:255|unique:sectors,name,' . $this->sector->id;
+        
         $this->validate();
 
         try {
@@ -41,12 +40,21 @@ class SectorEdit extends Component
             session()->flash('message', 'Sector updated successfully.');
             return redirect()->route('sectors.index');
         } catch (\Exception $e) {
-            $this->errors = ['error' => 'Failed to update sector. Please try again.'];
+            $this->addError('error', 'Failed to update sector. Please try again.');
+        }
+    }
+
+    public function deleteSector()
+    {
+        if ($this->sector) {
+            $this->sector->delete();
+            session()->flash('message', 'Sector deleted successfully.');
+            return redirect()->route('sectors.index');
         }
     }
 
     public function render()
     {
-        return view('livewire.sector-edit');
+        return view('livewire.sector.edit');
     }
 }

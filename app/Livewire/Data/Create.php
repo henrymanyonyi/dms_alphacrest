@@ -1,13 +1,13 @@
 <?php
 
-namespace App\Livewire;
+namespace App\Livewire\Data;
 
 use App\Models\Data;
 use App\Models\DataSegment;
 use Livewire\Component;
 use Livewire\WithFileUploads;
 
-class DataCreate extends Component
+class Create extends Component
 {
     use WithFileUploads;
     
@@ -117,6 +117,6 @@ class DataCreate extends Component
     
     public function render()
     {
-        return view('livewire.data-create');
+        return view('livewire.data.create');
     }
 }

@@ -1,15 +1,12 @@
 <?php
 
-namespace App\Livewire;
+namespace App\Livewire\Sector;
 
-use Livewire\Component;
 use App\Models\Sector;
-use Livewire\WithFileUploads;
+use Livewire\Component;
 
-class SectorCreate extends Component
+class Create extends Component
 {
-    use WithFileUploads;
-    
     public $name;
     public $description;
 
@@ -36,6 +33,6 @@ class SectorCreate extends Component
 
     public function render()
     {
-        return view('livewire.sector-create');
+        return view('livewire.sector.create');
     }
 }
