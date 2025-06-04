@@ -9,19 +9,19 @@ use Livewire\WithPagination;
 class Index extends Component
 {
     use WithPagination;
-    
+
     public $search = '';
     public $sortField = 'name';
     public $sortDirection = 'asc';
     public $confirmingSectorDeletion = false;
     public $sectorIdBeingDeleted = null;
-    
+
     protected $queryString = [
         'search' => ['except' => ''],
         'sortField' => ['except' => 'name'],
         'sortDirection' => ['except' => 'asc'],
     ];
-    
+
     public function sortBy($field)
     {
         if ($this->sortField === $field) {
@@ -29,22 +29,22 @@ class Index extends Component
         } else {
             $this->sortDirection = 'asc';
         }
-        
+
         $this->sortField = $field;
     }
-    
+
     public function confirmSectorDeletion($id)
     {
         $this->confirmingSectorDeletion = true;
         $this->sectorIdBeingDeleted = $id;
     }
-    
+
     public function cancelSectorDeletion()
     {
         $this->confirmingSectorDeletion = false;
         $this->sectorIdBeingDeleted = null;
     }
-    
+
     public function deleteSector()
     {
         Sector::find($this->sectorIdBeingDeleted)->delete();
@@ -52,12 +52,12 @@ class Index extends Component
         $this->sectorIdBeingDeleted = null;
         session()->flash('message', 'Sector deleted successfully.');
     }
-    
+
     public function updatingSearch()
     {
         $this->resetPage();
     }
-    
+
     public function render()
     {
         $sectors = Sector::query()
@@ -67,7 +67,7 @@ class Index extends Component
             })
             ->orderBy($this->sortField, $this->sortDirection)
             ->paginate(10);
-        
+
         return view('livewire.sector.index', [
             'sectors' => $sectors,
         ]);
