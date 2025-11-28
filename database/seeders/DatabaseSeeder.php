@@ -2,11 +2,14 @@
 
 namespace Database\Seeders;
 
+use App\Models\DataParameter;
+use App\Models\DataSector;
 use App\Models\DataSegment;
 use App\Models\Sector;
 use App\Models\User;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Str;
 
 class DatabaseSeeder extends Seeder
 {
@@ -24,83 +27,179 @@ class DatabaseSeeder extends Seeder
             'password' => '123456789'
         ]);
 
-        $sectors = [
+        // $sectors = [
+        //     'Security' => [
+        //         'Crime statistics (violent & non-violent)',
+        //         'Police force distribution & resources',
+        //         'Emergency response data',
+        //         'Community policing programs',
+        //         'Cybersecurity incidents',
+        //         'No. of law enforcement/police stations by county',
+        //     ],
+        //     'Economic Statistics (Macroeconomic Analysis)' => [
+        //         'GDP by sector (agriculture, industry, services)',
+        //         'Regional GDP contributions',
+        //         'Inflation (consumer price indices)',
+        //         'Employment & labor force participation',
+        //         'Investment trends (FDI, local investment)',
+        //     ],
+        //     'Education (TVET, High Schools, Universities, Primary Schools)' => [
+        //         'Enrollment rates by education level',
+        //         'Graduation rates & dropout rates',
+        //         'Facilities & infrastructure data',
+        //         'TVET program distribution & outcomes',
+        //     ],
+        //     'Transport Sector (Road, Rail, Air & Water)' => [
+        //         'Road network & conditions',
+        //         'Railway coverage & usage',
+        //         'Air traffic statistics (passenger & cargo)',
+        //         'Water transport routes & safety records',
+        //         'Public vs private transport utilization',
+        //     ],
+        //     'CDF Projects' => [
+        //         'Project distribution by sector (health, education, etc.)',
+        //         'Budget allocations & expenditures',
+        //         'Project completion status',
+        //         'Transparency & accountability metrics',
+        //     ],
+        //     'Agriculture & Livestock' => [
+        //         'Crop production volumes & types',
+        //         'Livestock population & health data',
+        //         'Agricultural subsidies & support',
+        //         'Market access & distribution chains',
+        //     ],
+        //     'Water Sector' => [
+        //         'Water source mapping & access levels',
+        //         'Water quality & treatment infrastructure',
+        //         'Urban vs rural water supply',
+        //         'Sanitation services data',
+        //         'Water conservation initiatives',
+        //     ],
+        //     'Tourism & Hospitality Sector' => [
+        //         'Tourist arrivals & origin countries',
+        //         'Hotel & accommodation statistics',
+        //         'Revenue generated from tourism (time series data)',
+        //         'Protected areas & national parks data',
+        //         'Employment in tourism sector',
+        //     ],
+        //     'Sports & Entertainment' => [
+        //         'Participation in sports by age/gender',
+        //         'Infrastructure (stadiums, facilities)',
+        //         'Revenue from entertainment & sports events',
+        //         'Talent development programs',
+        //     ],
+        // ];
+
+        // foreach ($sectors as $sectorName => $segments) {
+        //     $sector = Sector::create([
+        //         'name' => $sectorName,
+        //         'description' => $sectorName . ' sector data',
+        //         'created_by' =>  $user->id,
+        //         'deleted_by' =>  $user->id,
+        //     ]);
+        //     foreach ($segments as $segment) {
+        //         DataSegment::create([
+        //             'sector_id' => $sector->id,
+        //             'name' => $segment,
+        //             'description' => $segment,
+        //             'created_by' =>  $user->id,
+        //             'deleted_by' =>  $user->id,
+        //         ]);
+        //     }
+        // }
+
+        $dataSectors = [
             'Security' => [
-                'Crime statistics (violent and non-violent)',
-                'Police force distribution and resources',
-                'Emergency response data',
-                'Community policing programs',
-                'Cybersecurity incidents',
-                'No. of law enforcement/police stations by county',
+                'Crime Data',
+                'Police Infrustructure',
+                'Response Efficiency',
+                'Community policing',
+                'Border & Immigration',
+                'Disaster response',
             ],
-            'Economic Statistics (Macroeconomic Analysis)' => [
-                'GDP by sector (agriculture, industry, services)',
-                'Regional GDP contributions',
-                'Inflation (consumer price indices)',
-                'Employment and labor force participation',
-                'Investment trends (FDI, local investment)',
+            'Economic Statistics' => [
+                'GDP by sector',
+                'Employement',
+                'Inflation & cost of living',
+                'Trade Data',
+                'Financial Inclusion',
             ],
-            'Education (TVET, High Schools, Universities, Primary Schools)' => [
-                'Enrollment rates by education level',
-                'Graduation rates and dropout rates',
-                'Facilities and infrastructure data',
-                'TVET program distribution and outcomes',
+            'Education' => [
+                'Enrollment',
+                'Education Infrustructure',
+                'Performance',
+                'TVET Data',
+                'Universities',
             ],
             'Transport Sector (Road, Rail, Air & Water)' => [
-                'Road network and conditions',
-                'Railway coverage and usage',
-                'Air traffic statistics (passenger and cargo)',
-                'Water transport routes and safety records',
-                'Public vs private transport utilization',
+                'Road network',
+                'Road conditions',
+                'Road safety',
+                'Rail network',
+                'Rail performace',
+                'Rail safety',
+                'Port Data',
+                'Port safety',
             ],
             'CDF Projects' => [
-                'Project distribution by sector (health, education, etc.)',
-                'Budget allocations and expenditures',
-                'Project completion status',
-                'Transparency and accountability metrics',
+                'Project portfolio',
+                'Budget performance',
+                'Completion Rate',
+                'Impact',
             ],
-            'Agriculture and Livestock' => [
-                'Crop production volumes and types',
-                'Livestock population and health data',
-                'Agricultural subsidies and support',
-                'Market access and distribution chains',
+            'Agriculture & Livestock' => [
+                'Crop Data',
+                'Livestock Data',
+                'Market Prices',
+                'Inputs',
+                'Animal Health'
             ],
             'Water Sector' => [
-                'Water source mapping and access levels',
-                'Water quality and treatment infrastructure',
-                'Urban vs rural water supply',
-                'Sanitation services data',
-                'Water conservation initiatives',
+                'Access',
+                'Quality',
+                'Water Infrustructure',
+                'Non Revenue Water',
             ],
-            'Tourism and Hospitality Sector' => [
-                'Tourist arrivals and origin countries',
-                'Hotel and accommodation statistics',
-                'Revenue generated from tourism (time series data)',
-                'Protected areas and national parks data',
-                'Employment in tourism sector',
+            'Tourism & Hospitality' => [
+                'Arrivals',
+                'Accommodation',
+                'Revenue',
+                'Conservation',
             ],
-            'Sports and Entertainment' => [
-                'Participation in sports by age/gender',
-                'Infrastructure (stadiums, facilities)',
-                'Revenue from entertainment and sports events',
-                'Talent development programs',
+            'Sports & Entertainment' => [
+                'Sports Facilities',
+                'Participation',
+                'Funding',
+                'Creative Industry',
+                'Events Data'
+            ],
+            'Political Economy' => [
+                'Political Parties',
+                'Membership',
+                'Elected Representatives',
+                'Manifestos',
+                'Party Financing',
+                'Legislative Perfomance',
+                'Public Engagement'
             ],
         ];
 
-        foreach ($sectors as $sectorName => $segments) {
-            $sector = Sector::create([
+        foreach ($dataSectors as $sectorName => $segments) {
+
+            $sector = DataSector::create([
                 'name' => $sectorName,
-                'description' => $sectorName . ' sector data',
-                'created_by' =>  $user->id,
-                'deleted_by' =>  $user->id,
+                'slug' => Str::slug($sectorName),
+                'description' => null,
+                'created_by' => $user->id,
             ]);
+
             foreach ($segments as $segment) {
-                DataSegment::create([
-                    'sector_id' => $sector->id,
+                DataParameter::create([
                     'name' => $segment,
-                    'description' => $segment,
-                    'created_by' =>  $user->id,
-                    'deleted_by' =>  $user->id,
+                    'slug' => Str::slug($segment),
+                    'description' => null,
+                    'data_sector_id' => $sector->id,
+                    'created_by' => $user->id,
                 ]);
             }
         }
