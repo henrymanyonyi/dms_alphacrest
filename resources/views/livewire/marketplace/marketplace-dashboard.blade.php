@@ -609,7 +609,7 @@
                                         </div>
                                     </label>
 
-                                    <!-- Card Payment -->
+                                    {{-- <!-- Card Payment -->
                                     <label
                                         class="relative flex items-center p-4 border-2 rounded-xl cursor-pointer transition {{ $paymentMethod === 'card' ? 'border-blue-600 bg-blue-50' : 'border-gray-200 hover:border-gray-300' }}">
                                         <input wire:model.live="paymentMethod" type="radio" value="card"
@@ -642,7 +642,7 @@
                                                 <i class="fab fa-paypal text-blue-600 text-3xl"></i>
                                             </div>
                                         </div>
-                                    </label>
+                                    </label> --}}
                                 </div>
                                 @error('paymentMethod')
                                     <span class="text-red-500 text-sm mt-1">{{ $message }}</span>
